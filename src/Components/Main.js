@@ -67,7 +67,7 @@ function Main() {
         const data = new Blob([fileURI], { type: "image/svg+xml" });
 
         GuardarQr(data, `Disfruta_tu_Codigo_Qr_Guapa.svg`);
-    }, []);
+    }, [size]);
 
 
     return (
@@ -112,11 +112,11 @@ function Main() {
                             </form>
                         </div>
                         <div className="col-md-6 p-2 m-1 text-center border border-secundary">
-                            <a id="lnk_desc" onClick={svgBoton} title="Click para descargar en formato SVG">
+                            <button className="botonicono" id="lnk_desc" onClick={svgBoton} title="Click para descargar en formato SVG">
                                 <div className="icono_derecha">
                                     <img src={DescargarImg} height="40px" alt='' />
                                 </div>
-                            </a>
+                            </button>
                             <div id="titulo" className="fs-5 text-start">
                                 Texto en Codigo Qr
                             </div>
