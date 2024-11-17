@@ -84,7 +84,7 @@ function Main() {
                             <hr />
                             <form enctype="multipart/form-data">
                                 <div className="form-floating">
-                                    <input type="text" id="aqr" placeholder="" className="form-control" onChange={(e) => setValue(e.target.value)} value={value} />
+                                    <input type="text" id="aqr" placeholder="" className="form-control" onChange={(e) => setValue(e.target.value)} value={value}/>
                                     <label>Texto a convertir</label>
                                 </div>
                                 <div className="form-floating">
