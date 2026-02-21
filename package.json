@@ -2,7 +2,7 @@
   "name": "generador-codigo-qr",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ravenhrafnagud.github.io/",
+  "homepage": "https://ravenhrafnagud.github.io/generador-codigo-qr/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

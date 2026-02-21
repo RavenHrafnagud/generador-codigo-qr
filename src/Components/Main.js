@@ -50,7 +50,8 @@ function Main() {
     const svgRef = useRef();
 
     function GuardarQr(data, filename) {
-        const objectUrl = URL.createObjectURL(data);
+        const isBlob = data instanceof Blob;
+        const objectUrl = isBlob ? URL.createObjectURL(data) : data;
         const link = document.createElement("a");
         link.href = objectUrl;
         link.download = filename;
@@ -58,17 +59,22 @@ function Main() {
         link.click();
         document.body.removeChild(link);
 
-        setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
+        if (isBlob) {
+            setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
+        }
     }
 
     const svgBoton = useCallback(() => {
-        const content = svgRef.current.children[0].innerHTML;
+        const svgNode = svgRef.current?.firstElementChild;
+        if (!svgNode) {
+            return;
+        }
+        const content = svgNode.innerHTML;
         const fileURI = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="${size}" width="${size}" viewBox="0 0 41 41"> ${content} </svg>`;
         const data = new Blob([fileURI], { type: "image/svg+xml" });
 
         GuardarQr(data, `Disfruta_tu_Codigo_Qr_Guapa.svg`);
     }, [size]);
-
 
     return (
         <main>
@@ -82,7 +88,7 @@ function Main() {
                         <div className="col-md-5">
                             <h5>Capture un Texto</h5>
                             <hr />
-                            <form enctype="multipart/form-data">
+                            <form encType="multipart/form-data">
                                 <div className="form-floating">
                                     <input type="text" id="aqr" placeholder="" className="form-control" onChange={(e) => setValue(e.target.value)} value={value}/>
                                     <label>Texto a convertir</label>
@@ -105,14 +111,14 @@ function Main() {
                                 </div>
                                 <fieldset disabled={!includeImage}>
                                     <div className="form-floating">
-                                        <input type="text" id="aqr" placeholder="" className="form-control" onChange={(e) => setImageSrc(e.target.value)} value={imageSrc} />
+                                        <input type="text" id="imageSrc" placeholder="" className="form-control" onChange={(e) => setImageSrc(e.target.value)} value={imageSrc} />
                                         <label>Url de Imagen</label>
                                     </div>
                                 </fieldset>
                             </form>
                         </div>
-                        <div className="col-md-6 p-2 m-1 text-center border border-secundary">
-                            <button className="botonicono" id="lnk_desc" onClick={svgBoton} title="Click para descargar en formato SVG">
+                        <div className="col-md-6 p-2 m-1 text-center border border-secondary">
+                            <button type="button" className="botonicono" id="lnk_desc" onClick={svgBoton} title="Click para descargar en formato SVG">
                                 <div className="icono_derecha">
                                     <img src={DescargarImg} height="40px" alt='' />
                                 </div>
