@@ -73,13 +73,13 @@ function Main() {
         const fileURI = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="${size}" width="${size}" viewBox="0 0 41 41"> ${content} </svg>`;
         const data = new Blob([fileURI], { type: "image/svg+xml" });
 
-        GuardarQr(data, `Disfruta_tu_Codigo_Qr_Guapa.svg`);
+        GuardarQr(data, `Disfruta_tu_Codigo_Qr.svg`);
     }, [size]);
 
     return (
         <main>
             <div className="container-fluid bg-secondary p-4 text-center text-white">
-                <h2>Generador de Codigo Qr para Val ^-^</h2>
+                <h2>Generador de Codigo Qr</h2>
                 <img src={Logo} height="160px" className="rounded-circle border border-light mt-3" alt='' />
             </div>
             <div className="container p-2">
